@@ -18,11 +18,8 @@ string solution(string video_len, string pos, string op_start, string op_end, ve
     
     if(totalOpStart <= totalPos && totalPos <= totalOpEnd) totalPos = totalOpEnd;
     
-    int pos_min = totalPos / 60;
-    int pos_sec = totalPos % 60;
-    
-    string min = to_string(pos_min);
-    string sec = to_string(pos_sec);
+    string min = to_string(totalPos / 60);
+    string sec = to_string(totalPos % 60);
     
     if(min.size() < 2) min = '0' + min;
     if(sec.size() < 2) sec = '0' + sec;
