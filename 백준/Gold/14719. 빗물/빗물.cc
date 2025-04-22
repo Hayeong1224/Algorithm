@@ -5,36 +5,12 @@ int main(){
     int H, W;
     cin >> H >> W;
     for(int i=0; i<W; i++) cin >> world[i];
-    bool searching = true;
-    int max = 0, index = 0, result = 0; 
-    for(int i=0;i<W;i++) {
-        // 탐색
-        if (searching) {
-            for(int j=i+1;j<W;j++) {
-                if(max < world[j]) {
-                    max = world[j];
-                    index = j;
-                }
-                // 더 높은 블록을 찾았을 때 빗물 용량 구하러 가기
-                if(world[i] <= max) {
-                    max = world[i];
-                    searching = false;
-                    break;
-                }
-            }
-            // 마지막까지 더 높은 블록을 못 찾았을 때 빗물 용량 구하러 가기
-            if(world[i] > max) searching = false;
-        } else { // 빗물 용량 구하기
-            if(i < index) {
-                if(max == 0) break;
-                if(max - world[i] > 0) result += max - world[i];
-            }
-            else {
-                max = 0;
-                searching = true;
-                i--;
-            }
-        }
+    int result = 0; 
+    for(int i=1;i<W-1;i++) {
+        int left = 0, right =  0;
+        for(int j=0; j<i; j++) left = max(left, world[j]);
+        for(int j=i+1; j<W; j++) right = max(right, world[j]);
+        result += max(0, min(left, right) - world[i]);
     }
     cout << result;
 }
