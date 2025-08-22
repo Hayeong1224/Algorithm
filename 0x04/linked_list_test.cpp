@@ -5,13 +5,13 @@ const int MX = 1000005;
 int dat[MX], pre[MX], nxt[MX];
 int unused = 1;
 
-void insert(int addr, int num){
+void insert(int addr, int num){ //addr가 n번째가 아니고 배열 idx 번지인데 헷갈림 ㅠㅠㅠㅠㅠ
   dat[unused] = num;
   pre[unused] = addr;
   nxt[unused] = nxt[addr];
   if(nxt[addr] != -1) pre[nxt[addr]] = unused;
   nxt[addr] = unused;
-  unused++;
+  unused ++;
 }
 
 void erase(int addr){
