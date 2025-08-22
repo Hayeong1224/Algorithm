@@ -10,7 +10,7 @@ int main(void){
     string s1, s2;
     cin >> s1 >> s2;
 
-    for(auto c : s1) alp_s1[c-'a']++;
+    for(auto c : s1) alp_s1[c-'a']++;/
     for(auto c : s2) alp_s2[c-'a']++;
 
     int cnt = 0;
