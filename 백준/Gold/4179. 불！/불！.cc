@@ -10,7 +10,6 @@ int dy[4] = {0,1,0,-1};
 
 queue<pair<int,int> > QJ;
 queue<pair<int,int> > QF;
-int minDist;
 
 int main(void) {
     ios::sync_with_stdio(0);
