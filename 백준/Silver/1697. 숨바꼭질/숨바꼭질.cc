@@ -23,7 +23,7 @@ int main(void) {
             int nx;
             if(dir<2) nx = cur + dx[dir];
             else nx = cur*dx[dir];
-            if(nx < 0 || nx > 100000) continue;
+            if(nx < 0 || nx > 100002) continue;
             if(dist[nx] != -1) continue;
             dist[nx] = dist[cur] + 1;
             Q.push(nx);
