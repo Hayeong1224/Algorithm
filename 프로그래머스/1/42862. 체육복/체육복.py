@@ -6,17 +6,14 @@ def solution(n, lost, reserve):
     _lost = [l for l in lost if l not in reserve]
     _reserve = [r for r in reserve if r not in lost]
      
-    answer = n - len(_lost)
     # 앞뒤에서 빌리는 거 제외
-    for x in _lost:
+    for x in _reserve:
         f = x - 1
         b = x + 1
         
-        if f in _reserve:
-            _reserve.remove(f)
-            answer += 1
-        elif b in _reserve:
-            _reserve.remove(b)
-            answer += 1
+        if f in _lost:
+            _lost.remove(f)
+        elif b in _lost:
+            _lost.remove(b)
     
-    return answer
+    return n - len(_lost)
