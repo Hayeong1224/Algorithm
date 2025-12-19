@@ -18,17 +18,17 @@ def solution(rectangle, characterX, characterY, itemX, itemY):
                     grid[i][j] = 1
     
     queue = deque([(characterX * 2, characterY * 2, 0)])
-    visited = [[0] * 102 for _ in range(102)]
-    visited[characterX * 2][characterY * 2] = 1
+    # visited 사용하는 대신 grid를 -1로
+    grid[characterX * 2][characterY * 2] = -1
     
     while queue:
         x, y, d = queue.popleft()
-        if x == itemX * 2and y == itemY * 2:
+        if x == itemX * 2 and y == itemY * 2:
             return d // 2
         for i in range(4):
             nx, ny = x + dx[i], y + dy[i]
-            if 0 <= nx < 102 and 0 <= ny < 102 and grid[nx][ny] == 1 and not visited[nx][ny]:
-                visited[nx][ny] = 1
+            if 0 <= nx < 102 and 0 <= ny < 102 and grid[nx][ny] == 1:
+                grid[nx][ny] = -1
                 queue.append((nx,ny,d+1))
                 
     return -1 #사실 이럴 경우는 x 
