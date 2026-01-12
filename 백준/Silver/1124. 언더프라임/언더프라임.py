@@ -11,8 +11,7 @@ is_prime[0] = is_prime[1] = False
 for i in range(2,int(MAX**0.5)+1):
   if is_prime[i]:
     for j in range(i*i,MAX,i):
-      if is_prime[j]:
-        is_prime[j] = False
+      is_prime[j] = False
 
 # 소인수 개수 DP -> f(n) = f(n/p) + 1
 # 1. 가장 작은 소인수 찾기
