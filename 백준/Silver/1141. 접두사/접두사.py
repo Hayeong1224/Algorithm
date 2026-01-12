@@ -1,7 +1,5 @@
-from itertools import combinations
-
 n = int(input())
-array = [input() for _ in range(n)]
+array = [input().strip() for _ in range(n)]
 array.sort() # 바로 다음 순서랑만 비교하면 됨
 
 remove = [False] * n
