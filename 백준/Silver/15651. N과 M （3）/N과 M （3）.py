@@ -1,14 +1,6 @@
+from itertools import product
 n, m = map(int, input().split())
-result = []
+arr = [i for i in range(1, n+1)]
 
-def dfs(num):
-  if len(result) == m:
-    print(*(result))
-    return
-
-  for i in range(1,n+1):
-    result.append(i)
-    dfs(i)
-    result.pop()
-
-dfs(1)
+for p in product(arr,repeat=m):
+  print(*p)
