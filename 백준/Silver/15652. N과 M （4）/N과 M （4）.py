@@ -1,5 +1,14 @@
-from itertools import combinations_with_replacement
-
 n, m = map(int, input().split())
-for c in combinations_with_replacement([i for i in range(1,n+1)],m):
-  print(*c)
+path = []
+
+def dfs(start):
+  if len(path) == m:
+    print(*path)
+    return
+
+  for i in range(start, n+1):
+    path.append(i)
+    dfs(i)
+    path.pop()
+
+dfs(1)
