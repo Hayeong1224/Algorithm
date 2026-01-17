@@ -1,6 +1,5 @@
 n = int(input())
 channels = list(input() for _ in range(n))
-result = []
 
 idx1 = channels.index('KBS1')
 idx2 = channels.index('KBS2')
