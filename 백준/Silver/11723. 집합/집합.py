@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+write = sys.stdout.write
 all_elements = [str(i) for i in range(1,21)]
 
 m = int(input())
@@ -16,7 +17,7 @@ for _ in range(m):
     s.discard(line[1])
 
   elif cmd == "check":
-    print(1 if line[1] in s else 0)
+    write("1\n" if line[1] in s else "0\n")
 
   elif cmd == "toggle":
     s.remove(line[1]) if line[1] in s else s.add(line[1])
