@@ -1,38 +1,25 @@
-def roll(dir, dice):
-  if dir == 1: # 동쪽 -> d: r, r: u
-    temp = dice[1]
-    dice[1] = dice[3]
-    dice[3] = dice[0]
-    dice[0] = dice[2]
-    dice[2] = temp
-  elif dir == 2: # 서쪽 -> d: l, r: d
-    temp = dice[1]
-    dice[1] = dice[2]
-    dice[2] = dice[0]
-    dice[0] = dice[3]
-    dice[3] = temp
-  elif dir == 3: # 북쪽 -> d: b, r: r
-    temp = dice[1]
-    dice[1] = dice[5]
-    dice[5] = dice[0]
-    dice[0] = dice[4]
-    dice[4] = temp
-  else: # 남쪽 -> d: f,r: r
-    temp = dice[1]
-    dice[1] = dice[4]
-    dice[4] = dice[0]
-    dice[0] = dice[5]
-    dice[5] = temp
+import sys
+input = sys.stdin.readline
+
+def roll(dir, d):
+  if dir == 1: # 동
+    d[0], d[1], d[2], d[3] = d[2], d[3], d[1], d[0]
+  elif dir == 2: # 서
+    d[0], d[1], d[2], d[3] = d[3], d[2], d[0], d[1]
+  elif dir == 3: # 북
+    d[0], d[1], d[4], d[5] = d[4], d[5], d[1], d[0]
+  else: # 남
+    d[0], d[1], d[4], d[5] = d[5], d[4], d[0], d[1]
 
 N, M, x, y, K = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
 cmd = list(map(int, input().split()))
 
+# 0위, 1아래, 2왼쪽, 3오른쪽, 4앞, 5뒤
+dice = [0] * 6
 # 1동 2서 3북 4남
 dx = [0,0,0,-1,1]
 dy = [0,1,-1,0,0]
-# 0위, 1아래, 2왼쪽, 3오른쪽, 4앞, 5뒤
-dice = [0,0,0,0,0,0]
 
 for dir in cmd:
   nx, ny = x + dx[dir], y + dy[dir]
@@ -45,5 +32,6 @@ for dir in cmd:
   else:
     dice[1] = board[nx][ny]
     board[nx][ny] = 0
+    
   print(dice[0])
   x, y = nx, ny
