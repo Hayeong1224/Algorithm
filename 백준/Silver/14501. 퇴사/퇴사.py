@@ -1,25 +1,19 @@
-from itertools import combinations
-n = int(input())
+def dfs(date, total_price):
+  global ans
+  if date == len(counsels):
+    ans = max(ans, total_price)
+    return
+    
+  t, p = counsels[date]
+  # 선택 x
+  dfs(date+1, total_price)
+  # 선택 o
+  if date+t <= len(counsels):
+    dfs(date+t, total_price + p)
 
-counsels = [] # [날짜, 시간, 금액] 
-for i in range(n): # 불가능한 상담(n-1일 이후) 빼고 받기 
-  t, p = map(int, input().split())
-  if i+t <= n:
-    counsels.append([i+1,t,p])
+n = int(input())
+counsels = [list(map(int, input().split())) for _ in range(n)] # [시간, 금액]
 
 ans = 0
-for i in range(1,len(counsels)+1):  
-  for com in combinations(counsels, i):
-    possible = True
-    for j in range(i-1):
-        d1,t1,_ = com[j]
-        d2,_,_ = com[j+1]
-
-        if d1+t1 > d2:
-          possible = False
-          break
-
-    if possible:
-      ans = max(ans, sum(c[2] for c in com))
-
+dfs(0,0)
 print(ans)
