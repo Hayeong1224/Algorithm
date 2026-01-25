@@ -1,27 +1,36 @@
-from itertools import permutations
+def dfs(n, temp, op_list):
+  global min_ans, max_ans
+  
+  if n == N:
+    min_ans = min(min_ans, temp)
+    max_ans = max(max_ans, temp)
+    return
+
+  if op_list[0] > 0:
+    new_op = op_list.copy()
+    new_op[0] -= 1
+    dfs(n+1, temp+array[n], new_op)
+
+  if op_list[1] > 0:
+    new_op = op_list.copy()
+    new_op[1] -= 1
+    dfs(n+1, temp-array[n], new_op)
+
+  if op_list[2] > 0:
+    new_op = op_list.copy()
+    new_op[2] -= 1
+    dfs(n+1, temp*array[n], new_op)
+
+  if op_list[3] > 0:
+    new_op = op_list.copy()
+    new_op[3] -= 1
+    dfs(n+1, int(temp/array[n]), new_op)
+
+
 N = int(input())
 array = list(map(int, input().split()))
-op = []
-line = list(map(int, input().split()))
-for i in range(4): # 0: +, 1:-, 2:*, 3://
-  while line[i] > 0 :
-    op.append(i)
-    line[i] -= 1
+op = list(map(int, input().split()))
       
 min_ans, max_ans = float('inf'), -float('inf')
-for p in set(permutations(op, N-1)):
-  temp = array[0]
-  for i in range(N-1):
-    if p[i] == 0:
-      temp += array[i+1]
-    elif p[i] == 1:
-      temp -= array[i+1]
-    elif p[i] == 2:
-      temp *= array[i+1]
-    else:
-      temp = int(temp / array[i+1])
-      
-  min_ans = min(min_ans, temp)
-  max_ans = max(max_ans, temp)
-
+dfs(1,array[0],op)
 print(max_ans, min_ans, sep='\n')
