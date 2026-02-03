@@ -130,8 +130,5 @@ for _ in range(t):
             elif side == 'F': rotate_F_counter(cube)
             elif side == 'B': rotate_B_counter(cube)
     
-    for r in range(3):
-        for c in range(3):
-            print(cube['U'][r][c], end='')
-        print()
-    
+    for row in cube['U']:
+        print("".join(row))
