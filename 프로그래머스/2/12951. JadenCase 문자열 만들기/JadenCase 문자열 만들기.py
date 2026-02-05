@@ -1,17 +1,8 @@
 def solution(s):
-    words = s.split(" ")
     answer = []
     
-    for w in words:
-        new_w = ''
-        for i in range(len(w)):
-            if i == 0 and w[i].isalpha():
-                new_w += w[i].upper()
-            elif w[i].isalpha:
-                new_w += w[i].lower()
-            else:
-                new_w += w[i]
-                
-        answer.append(new_w)
-                
+    for w in s.split(" "):
+        # answer.append(w[0].upper() + w[1:].lower() if w[0].isalpha() else w[0] + w[1:].lower())
+        answer.append(w.capitalize())
+        
     return " ".join(answer)
