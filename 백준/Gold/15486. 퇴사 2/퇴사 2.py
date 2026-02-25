@@ -5,18 +5,11 @@ for i in range(N):
   T.append(t)
   P.append(p)
 
-dp = [0] * N
+dp = [0] * (N+1)
 for i in range(N-1, -1, -1):
-  a, b, c = 0, 0, 0
-  if i != N-1:
-    a = dp[i+1]
-  
-  if i + T[i] == N:
-    b = P[i]
+  if i + T[i] <= N:
+    dp[i] = max(P[i] + dp[i + T[i]], dp[i+1])
+  else:
+    dp[i] = dp[i+1]
 
-  if i + T[i] < N:
-    c = P[i] + dp[i + T[i]]
-  
-  dp[i] = max(a,b,c)
-
-print(max(dp))
+print(dp[0])
