@@ -1,16 +1,16 @@
 def solution(n, computers):
-    answer = 0
-    visited = [0] * n
-    
-    def dfs(x):
-        visited[x] = 1
-        for i in range(n):
-                if computers[x][i] == 1 and not visited[i]:
-                    dfs(i)
+    def dfs(cur):
+        visited[cur] = True
+        for nxt in range(n):
+            if computers[cur][nxt] == 1 and not visited[nxt]:
+                dfs(nxt)
         
+    
+    visited = [False] * n
+    cnt = 0
     for i in range(n):
         if not visited[i]:
             dfs(i)
-            answer += 1
-            
-    return answer
+            cnt += 1
+    
+    return cnt
