@@ -1,10 +1,10 @@
 # [level 3] 순위 - 49191 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/49191) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/49191?language=cpp) 
 
 ### 성능 요약
 
-메모리: 10.5 MB, 시간: 4.86 ms
+메모리: 4.47 MB, 시간: 6.29 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 01월 09일 22:49:00
+2026년 04월 08일 18:22:15
 
 ### 문제 설명
 
