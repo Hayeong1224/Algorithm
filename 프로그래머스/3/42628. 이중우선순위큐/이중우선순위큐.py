@@ -1,24 +1,23 @@
 import heapq
-
 def solution(operations):
-    min_heap = []
-    max_heap = []
+    answer = []
     
-    for o in operations:
-        cmd, num = o.split()
+    minq = []
+    maxq = []
+    
+    for op in operations:
+        cmd, num = op.split()
         num = int(num)
         
         if cmd == 'I':
-            heapq.heappush(min_heap, num)
-            heapq.heappush(max_heap, -num)
-        elif len(max_heap) != 0 and cmd == 'D' and num == 1:
-            v = heapq.heappop(max_heap)
-            min_heap.remove(-v)
-        elif len(min_heap) != 0 and cmd == 'D' and num == -1:
-            v = heapq.heappop(min_heap)
-            max_heap.remove(-v)
-            
-    if len(min_heap) != 0:
-        return [-heapq.heappop(max_heap), heapq.heappop(min_heap)]
+            heapq.heappush(minq, num)
+            heapq.heappush(maxq, -num)
+        elif minq and maxq:
+            if num == -1:
+                heapq.heappop(minq)
+                del maxq[-1]
+            else:
+                heapq.heappop(maxq)
+                del minq[-1]
     
-    return [0,0]
+    return [-maxq[0], minq[0]] if minq and maxq else [0,0]
