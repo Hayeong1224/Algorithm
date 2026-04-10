@@ -1,5 +1,4 @@
 -- 코드를 작성해주세요
--- FISH_TYPE별 가장 큰 LENTH 구해서 걔랑 FISH_NAME_INFO랑 조인하면 안되나??
 
 SELECT 
     A.ID, B.FISH_NAME, A.LENGTH
