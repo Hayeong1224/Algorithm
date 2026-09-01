@@ -1,10 +1,12 @@
 def solution(participant, completion):
-    d = {}
-    for p in participant:
-        d[p] = d.get(p,0) + 1
-    for c in completion:
-        d[c] -= 1
+    dic = dict()
+    temp = 0
     
-    for k in d:
-        if d[k] > 0:
-            return k
+    for part in participant:
+        dic[hash(part)] = part
+        temp += hash(part)
+    
+    for comp in completion:
+        temp -= hash(comp)
+    
+    return dic[temp] 
