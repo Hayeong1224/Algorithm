@@ -1,13 +1,15 @@
 def solution(citations):
-    citations.sort(reverse=True)
-    h = len(citations)
-    while(h > 0):
-        count = 0
-        for i in range(len(citations)):
-            if citations[i] >= h:
-                count += 1
-        if count >= h:
-            return h
-        else:
-            h -= 1
-    return h
+    
+    citations.sort(reverse=True) # 큰 순서대로 정렬
+    answer = citations[0] # 최댓값부터 시작
+    
+    while answer >= 0:
+        # answer 이상인 값의 수 >= answer면 return answer
+        cnt = 0
+        for c in citations:
+            if c >= answer:
+                cnt += 1
+        if cnt >= answer:
+            return answer
+    
+        answer -= 1
