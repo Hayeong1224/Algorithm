@@ -1,22 +1,20 @@
 from collections import deque
 
 def solution(priorities, location):
-    q = deque()
-    for i in range(len(priorities)):
-        q.append((i, priorities[i]))
+    q = deque([(p,i) for i, p in enumerate(priorities)])
+    cnt = 0
     
-    answer = [0] * len(priorities)
+    while priorities:
+        # max값을 찾기
+        max_p = max(q, key = lambda x : x[0])
+        idx = q.index(max_p)
+        
+        # max값이 제일 앞에 올 때까지 왼쪽으로 보냄
+        q.rotate(-idx)
     
-    t = 1
-    while q:
-        mq = max(q, key = lambda x : x[1])
-        mp = mq[1]
-        i, p = q.popleft()
-
-        if p == mp: # 실행
-            answer[i] = t
-            t += 1
-        else:
-            q.append((i,p))
-            
-    return answer[location]
+        # max 실행
+        p, i = q.popleft()
+        cnt += 1
+        
+        if i == location: 
+            return cnt
