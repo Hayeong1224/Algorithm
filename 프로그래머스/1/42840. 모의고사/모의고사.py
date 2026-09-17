@@ -1,15 +1,15 @@
 def solution(answers):
-    ans1 = [1, 2, 3, 4, 5] * 2000
-    ans2 = [2, 1, 2, 3, 2, 4, 2, 5] * 2000
-    ans3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5] * 2000
+    n = len(answers)
+    answer_sheets = [[1, 2, 3, 4, 5] * 2000, [2, 1, 2, 3, 2, 4, 2, 5] * 1250, [3, 3, 1, 1, 2, 2, 4, 4, 5, 5] * 1000]
     
-    s1 = sum(1 for a, b in zip(answers, ans1) if a == b)
-    s2 = sum(1 for a, b in zip(answers, ans2) if a == b)
-    s3 = sum(1 for a, b in zip(answers, ans3) if a == b)
+    result = []
+    cnt = []
+    for answer_sheet in answer_sheets:
+        cnt.append(sum(choice == ans for choice, ans in zip(answer_sheet, answers)))
+        
+    max_cnt = max(cnt)
+    for i, val in enumerate(cnt):
+        if val == max_cnt:
+            result.append(i+1)
     
-    scores = [s1, s2, s3]
-    target = max(scores)
-    
-    ans = [i+1 for i, s in enumerate(scores) if s == target]
-    
-    return sorted(ans)
+    return result
