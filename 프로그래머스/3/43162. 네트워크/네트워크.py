@@ -1,16 +1,21 @@
+from collections import deque
+
 def solution(n, computers):
-    def dfs(cur):
-        visited[cur] = True
-        for nxt in range(n):
-            if computers[cur][nxt] == 1 and not visited[nxt]:
-                dfs(nxt)
-        
+    answer = 0
+    in_net = set()
     
-    visited = [False] * n
-    cnt = 0
-    for i in range(n):
-        if not visited[i]:
-            dfs(i)
-            cnt += 1
+    for i in range(len(computers)):
+        if i not in in_net: # 그룹 찾아가자~~
+            answer += 1
+            
+            q = deque([i])
+            
+            while q:
+                cur = q.popleft()
+                in_net.add(cur)
+                
+                for idx, check in enumerate(computers[cur]):
+                    if check and idx not in in_net:
+                        q.append(idx)
     
-    return cnt
+    return answer
