@@ -1,16 +1,16 @@
-from itertools import permutations
-
 def solution(k, dungeons):
-    for i in range(len(dungeons), 0, -1):
-        for p in permutations(dungeons, i):
-            cur_k = k
-            success = True
-            
-            for need, spend in p:
-                if cur_k >= need and cur_k - spend >= 0:
-                    cur_k -= spend
-                else: 
-                    success = False
-                    break
-            
-            if success: return i
+    visited = [False] * len(dungeons)
+    answer = 0
+    
+    def dfs(cur_k, cnt):
+        nonlocal answer
+        answer = max(answer, cnt)
+        
+        for i in range(len(dungeons)):
+            if not visited[i] and cur_k >= dungeons[i][0]:
+                visited[i] = True
+                dfs(cur_k - dungeons[i][1], cnt+1)
+                visited[i] = False
+    
+    dfs(k, 0)
+    return answer
