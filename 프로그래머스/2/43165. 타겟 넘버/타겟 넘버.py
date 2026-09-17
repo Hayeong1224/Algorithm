@@ -1,11 +1,21 @@
-def dfs(numbers, target, idx, current_sum):
-    if idx == len(numbers):
-        return 1 if current_sum == target else 0
-    
-    total = 0
-    total += dfs(numbers, target, idx + 1, current_sum + numbers[idx]) # 덧셈
-    total += dfs(numbers, target, idx + 1, current_sum - numbers[idx]) # 뺄셈
-    return total
-
 def solution(numbers, target):
-    return dfs(numbers, target, 0, 0)
+    
+    def dfs(idx, cur):
+        # 종료 조건
+        if idx == len(numbers):
+            if target == cur:
+                return 1
+            else:
+                return 0
+        
+        cnt = 0
+        nxt = numbers[idx]
+        
+        # +
+        cnt += dfs(idx+1, cur + nxt)
+        
+        # -
+        cnt += dfs(idx+1, cur - nxt)
+        return cnt
+    
+    return dfs(0, 0)
