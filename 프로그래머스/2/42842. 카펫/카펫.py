@@ -1,10 +1,11 @@
 def solution(brown, yellow):
-    rc = brown + yellow
+    # 1) brown + yellow = w*h
+    # 2) yellow = (w-2) * (h-2)
     
-    # r이 c보다 작을 수 밖에 없음!
-    for r in range(3, int(rc**0.5) + 1):
-        if rc % r == 0:
-            c = rc // r
+    total = brown + yellow # total = w*h
+    for h in range(3, int(total ** 0.5) + 1): # total의 약수 h,w 쌍 구하기. yellow가 존재하려면 h가 무조건 3 이상
+        if total % h == 0:
+            w = total // h
             
-            if (r-2) * (c-2) == yellow:
-                return [c, r]
+            if (w-2) * (h-2) == yellow:
+                return [w,h] # h를 최소값부터 보니까 w>=h 만족
