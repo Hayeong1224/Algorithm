@@ -1,19 +1,17 @@
 def solution(n, lost, reserve):
-    lost.sort()
-    reserve.sort()
+    overlap = set(lost) & set(reserve) # 겹치는 학생
     
-    # 자기자신 제외
-    _lost = [l for l in lost if l not in reserve]
-    _reserve = [r for r in reserve if r not in lost]
-     
-    # 앞뒤에서 빌리는 거 제외
-    for x in _reserve:
-        f = x - 1
-        b = x + 1
-        
-        if f in _lost:
-            _lost.remove(f)
-        elif b in _lost:
-            _lost.remove(b)
+    lost = sorted(set(lost) - overlap)
+    reserve = set(reserve) - overlap
     
-    return n - len(_lost)
+    ans = n - len(lost)
+    
+    for l in lost:
+        if l-1 in reserve:
+            ans += 1
+            reserve.remove(l-1)
+        elif l+1 in reserve:
+            ans += 1
+            reserve.remove(l+1)
+
+    return ans
