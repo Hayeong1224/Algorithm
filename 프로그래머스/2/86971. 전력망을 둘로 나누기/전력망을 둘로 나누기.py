@@ -1,32 +1,35 @@
 from collections import deque
 
 def solution(n, wires):
-    ans = n 
+    min_diff = len(wires)
     
-    for i in range(len(wires)): # 끊는 전선 선택
-        
-        adj = [[] for _ in range(n+1)]
-        # i 제외 인접 리스트 만들기
-        for idx, wire in enumerate(wires):
-            if idx == i: continue
-            adj[wire[0]].append(wire[1])
-            adj[wire[1]].append(wire[0])
-            
-        # 네트워크 노드 세기
+    for [w1, w2] in wires: # 하나씩 끊어보자
+        print(f"{w1, w2} 끊음")
+        new_wires = [w for w in wires if w != [w1, w2]]
         visited = [False] * (n+1)
-        q = deque([1])
-        visited[1] = True
-        cnt = 0
+        
+        q = deque([new_wires[0][0]])
+        visited[new_wires[0][0]] = True
+        cnt = 1
         
         while q:
             cur = q.popleft()
-            cnt += 1
-            
-            for node in adj[cur]:
-                if not visited[node]:
-                    q.append(node)
-                    visited[node] = True
+            print(f"{cur} 방문")
+            for nw1, nw2 in new_wires: # 단방향이니까 양방향 확인
+                if cur == nw1 and not visited[nw2]:
+                    visited[nw2] = True
+                    print(nw1, nw2)
+                    q.append(nw2)
+                    cnt += 1
+                elif cur == nw2 and not visited[nw1]:
+                    visited[nw1] = True
+                    print(nw2, nw1)
+                    q.append(nw1)
+                    cnt += 1
         
-        ans = min(ans, abs(cnt - (n - cnt)))
-    
-    return ans    
+        min_diff = min(min_diff, abs(cnt - (n - cnt)))
+        
+        print(f"차이: {abs(cnt - (n - cnt))}, 현재 min: {min_diff}")
+        
+    return min_diff
+                
