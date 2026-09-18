@@ -1,17 +1,16 @@
-def solution(word): 
-    # 5번째 자리: 가중치 1
-    # 4번째 자리: 가중치 6 (1 * 5 + 1)
-    # 3번째 자리: 가중치 31 (6 * 5 + 1)
-    # 2번째 자리: 가중치 156 (31 * 5 + 1)
-    # 1번째 자리: 가중치 781(156 * 5 + 1)   
+from itertools import product
+def solution(word):
+    # 다 만들고 정렬
+    vowels = ['A', 'E', 'I', 'O', 'U']
+    word_list = []
+    for i in range(1, 6):
+        for pr in product(vowels, repeat=i):
+            word_list.append(''.join(pr))
+
+    word_list.sort()
     
-    weights = [781, 156, 31, 6, 1]
-    vowels = "AEIOU"
+    return word_list.index(word) + 1
+
     
-    ans = 0
-    for i in range(len(word)):
-        idx = vowels.index(word[i])
-        
-        ans += idx * weights[i] + 1
-        
-    return ans
+    
+    
