@@ -4,24 +4,25 @@
 
 using namespace std;
 
-vector<int> p1 = {1, 2, 3, 4, 5};
-vector<int> p2 = {2, 1, 2, 3, 2, 4, 2, 5};
-vector<int> p3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
-
 vector<int> solution(vector<int> answers) {
-    vector<int> scores(3, 0);
     
-    for (int i=0; i < answers.size(); i++) {
-        if (p1[i % p1.size()] == answers[i]) scores[0] ++;
-        if (p2[i % p2.size()] == answers[i]) scores[1] ++;
-        if (p3[i % p3.size()] == answers[i]) scores[2] ++;
+    vector<int> arr1 = {1,2,3,4,5};
+    vector<int> arr2 = {2,1,2,3,2,4,2,5};
+    vector<int> arr3 = {3,3,1,1,2,2,4,4,5,5};
+
+    vector<int> score (3, 0);
+
+    for (int i = 0; i < answers.size(); i++) {
+        if (answers[i] == arr1[i % arr1.size()]) score[0]++;
+        if (answers[i] == arr2[i % arr2.size()]) score[1]++;
+        if (answers[i] == arr3[i % arr3.size()]) score[2]++;
     }
     
-    int target = *max_element(scores.begin(), scores.end());
+    auto max_score = *max_element(score.begin(), score.end());
     vector<int> answer;
     
-    for (int i=0; i<3; i++) {
-        if (scores[i] == target) answer.push_back(i+1);
+    for (int i = 0; i < score.size(); i++) {
+        if (score[i] == max_score) answer.push_back(i+1);
     }
     
     return answer;
