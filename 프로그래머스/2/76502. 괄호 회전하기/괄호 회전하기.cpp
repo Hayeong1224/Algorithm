@@ -1,27 +1,39 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <stack>
+#include <unordered_map>
 
 using namespace std;
 
-unordered_map<char, char> bracketPair = {{')','('}, {']','['}, {'}', '{'}};
+int is_right(string s) {
+    int n = s.length();
+    
+    stack<char> st;
+    unordered_map<char, char> um = {
+        {']', '['},
+        {'}', '{'},
+        {')', '('}
+    };
+    
+    for (char ch : s) {
+        if (!um.count(ch)) st.push(ch);
+        else{
+            if(st.empty() || st.top() != um[ch]) return 0;
+            st.pop();
+        }
+    }
+    
+    if (st.empty()) return 1;
+    else return 0;
+}
 
 int solution(string s) {
     int answer = 0;
-    unsigned int n=s.size();
+    int n = s.length();
     
-    for(int i=0;i<n; i++){ //전체 회전
-        stack<char> st;
-        bool isWrong = false;
-        for(int j=0; j<n; j++){ //각 회전 별 문자 체크
-            char c = s[(i+j)%n];
-            if(bracketPair.count(c)){//닫힌 괄호
-                if(st.empty() || st.top() != bracketPair[c]) {
-                    isWrong = true;
-                    break;
-                }
-                else st.pop();
-            } else st.push(c); //열린 괄호
-        }
-        if(!isWrong && st.empty()) answer++;
+    for (int i=0; i<n; i++) {
+        answer += is_right(s.substr(i) + s.substr(0,i));
     }
+    
     return answer;
 }
