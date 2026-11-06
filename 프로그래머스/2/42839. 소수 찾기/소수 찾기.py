@@ -1,22 +1,22 @@
 from itertools import permutations
-import math
 
-# 소수 판별
-def is_prime(num):
-    if num < 2: 
+def is_prime(n):
+    if n < 2:
         return False
-    for i in range(2, int(math.sqrt(num))+1):
-        if num % i == 0:
+    
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
             return False
+    
     return True
 
 def solution(numbers):
-    new_numbers = [n for n in numbers] # 한 글자씩
-    
-    # 모든 경우의 수 만들기
+    num = [i for i in numbers]
     candidates = set()
-    for i in range(1, len(numbers) + 1):
-        for p in permutations(new_numbers, i):
-            candidates.add(int(''.join(p)))
     
-    return sum(1 for c in candidates if is_prime(c)) 
+    # 만들 수 있는 경우의 수 순열 -> 소수 판별 돌리기
+    for i in range(1, len(numbers) + 1):
+        for p in permutations(num, i):
+            candidates.add(int(''.join(p)))
+            
+    return sum(1 if is_prime(n) else 0 for n in candidates)
