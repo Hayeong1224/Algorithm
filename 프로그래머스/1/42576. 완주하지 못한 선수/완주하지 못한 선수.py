@@ -1,12 +1,10 @@
 def solution(participant, completion):
-    dic = dict()
-    temp = 0
+    players = {}
+    for p in participant:
+        players[p] = players.get(p, 0) + 1
+    for c in completion:
+        players[c] -= 1
     
-    for part in participant:
-        dic[hash(part)] = part
-        temp += hash(part)
-    
-    for comp in completion:
-        temp -= hash(comp)
-    
-    return dic[temp] 
+    for p in players:
+        if players.get(p, 0) > 0: 
+            return p 
