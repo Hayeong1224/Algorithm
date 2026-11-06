@@ -5,8 +5,8 @@ def solution(phone_book):
         
     for p in phone_book:
         n = len(p)
-        for i in range(1, n+1):
-            if p[:i] in book and p[:i] != p:
+        for i in range(1, n):
+            if p[:i] in book:
                 return False
         
     return True
