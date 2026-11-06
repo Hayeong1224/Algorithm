@@ -1,9 +1,12 @@
 def solution(phone_book):
+    book = {}
     phone_book.sort()
-    
-    for i in range(len(phone_book)-1):
-        a = phone_book[i]
-        b = phone_book[i+1]
-        if b.startswith(a):
-            return False
+    for p in phone_book:
+        n = len(p)
+        for i in range(1, n+1):
+            if p[:i] in book:
+                return False
+        
+        book[p] = book.get(p, 0) + 1
+        
     return True
