@@ -1,16 +1,24 @@
+from itertools import permutations
+
 def solution(k, dungeons):
-    visited = [False] * len(dungeons)
-    answer = 0
+    # 최소 필요 피로도, 소모 피로도
+    # 최대 던전 수? 다 돌리고 비교하자
     
-    def dfs(cur_k, cnt):
-        nonlocal answer
-        answer = max(answer, cnt)
+    # 가능 순서
+    order = [i for i in range(len(dungeons))]
+    
+    max_cnt = 0
+    for p in permutations(order, len(dungeons)):
+        cnt = 0
+        temp_k = k
         
-        for i in range(len(dungeons)):
-            if not visited[i] and cur_k >= dungeons[i][0]:
-                visited[i] = True
-                dfs(cur_k - dungeons[i][1], cnt+1)
-                visited[i] = False
+        for i in p:
+            if temp_k >= dungeons[i][0]:
+                cnt += 1
+                temp_k -= dungeons[i][1]
+            else:
+                break
+                
+        max_cnt = max(max_cnt, cnt)
     
-    dfs(k, 0)
-    return answer
+    return max_cnt
