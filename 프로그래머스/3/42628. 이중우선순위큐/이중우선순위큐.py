@@ -1,23 +1,18 @@
 import heapq
+
 def solution(operations):
-    answer = []
-    
-    minq = []
-    maxq = []
+    q = []
     
     for op in operations:
-        cmd, num = op.split()
+        x, num = op.split()
         num = int(num)
-        
-        if cmd == 'I':
-            heapq.heappush(minq, num)
-            heapq.heappush(maxq, -num)
-        elif minq and maxq:
-            if num == -1:
-                heapq.heappop(minq)
-                del maxq[-1]
-            else:
-                heapq.heappop(maxq)
-                del minq[-1]
+        if x == 'I':
+            heapq.heappush(q, num)
     
-    return [-maxq[0], minq[0]] if minq and maxq else [0,0]
+        elif q:
+            if num == 1: # 최댓값 삭제
+                q.remove(max(q))
+            else: # 최솟값 삭제
+                heapq.heappop(q)
+    
+    return [max(q), heapq.heappop(q)] if q else [0,0]
